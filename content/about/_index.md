@@ -1,9 +1,3 @@
-+++
-date = '2025-12-10T17:45:59+01:00'
-draft = true
-title = 'About'
-+++
-
 # Whoami
 ---
 
