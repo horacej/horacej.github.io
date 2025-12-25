@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>//localhost:8664/writeups/in_the_cloud/</link>
+    <link>//localhost:60211/writeups/in_the_cloud/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="//localhost:8664/writeups/in_the_cloud/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="//localhost:60211/writeups/in_the_cloud/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
