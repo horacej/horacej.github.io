@@ -11,8 +11,10 @@ I'm Horace (also known as 0z and variations of "nothing"). Currently a cybersecu
 
 # Certifications
 ---
+
 > Certified Penetration Testing Specialist - **HackTheBox**
 
 # Contact
 ---
+
 > [Send A Mail](mailto:thoword95@gmail.com)
