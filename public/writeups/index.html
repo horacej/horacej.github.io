@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8664&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>In the Cloud :: </title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hackerlab2024 Web ChallengesBenin National CTF 2024
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:8664/writeups/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:8664/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:8664/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="//localhost:8664/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="0z" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="In the Cloud">
+<meta property="og:description" content="Hackerlab2024 Web ChallengesBenin National CTF 2024
+" />
+<meta property="og:url" content="//localhost:8664/writeups/" />
+<meta property="og:site_name" content="" />
+
+  
+    <meta property="og:image" content="//localhost:8664/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-07-30 00:00:00 &#43;0000 UTC" />
+
+
+
+
+  <link href="/writeups/index.xml" rel="alternate" type="application/rss+xml" title="" />
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    0z stuff&#39;s
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups">Writeups</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups" >Writeups</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+  
+    <div class="index-content">
+      <style>
+
+.contents-box {
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+  background-color: inherit;
+  box-shadow: 0 10px 30px rgba(11, 42, 74, 0.35);
+
+}
+
+/* Remove link styling */
+a {
+  text-decoration: none;
+  display: block;
+}
+
+/* Transition */
+.contents-box {
+  transition: 
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Hover effect */
+.contents-box:hover {
+  background-color: #2ba0e4ff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Title */
+.contents-box h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Description */
+.contents-box p {
+  margin: 0;
+  color: white;
+  font-size: 0.95rem;
+}
+
+</style>
+<h1>Hackerlab2024 Web Challenges</h1>
+<p>Benin National CTF 2024</p>
+<hr>
+<a href="in_the_cloud/">
+<div class="contents-box">
+<h3>In The Cloud</h3>
+<p><em>CSS Injection, CSRF Token stealing</em></p>
+</div>
+</a>
+<a href="admin/" style="text-decoration: none;">
+<div class="contents-box">
+<h3>Admin</h3>
+<p><em>jku exploit, LFI, Flask Debug Pin</em></p>
+</div>
+</a>
+<a href="command_via_door/" style="text-decoration: none;">
+<div class="contents-box">
+<h3>Command Via Door</h3>
+<p><em>IDOR, Command Injection</em></p>
+</div>
+</a>
+<a href="digisphere/" style="text-decoration: none;">
+<div class="contents-box">
+<h3>Digisphere</h3>
+<p><em>XXE</em></p>
+</div>
+</a>
+    </div>
+  
+  <div class="posts">
+    
+
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+    
+  </div>
+</div>
+
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

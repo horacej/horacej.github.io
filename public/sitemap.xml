@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>//localhost:8664/</loc>
+    <lastmod>2025-12-10T17:45:59+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:8664/about/</loc>
+    <lastmod>2025-12-10T17:45:59+01:00</lastmod>
+  </url><url>
+    <loc>//localhost:8664/writeups/</loc>
+    <lastmod>2024-07-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:8664/projects/</loc>
+  </url><url>
+    <loc>//localhost:8664/writeups/admin/</loc>
+  </url><url>
+    <loc>//localhost:8664/writeups/command_via_door/</loc>
+  </url><url>
+    <loc>//localhost:8664/writeups/digisphere/</loc>
+  </url><url>
+    <loc>//localhost:8664/writeups/in_the_cloud/</loc>
+  </url><url>
+    <loc>//localhost:8664/categories/</loc>
+  </url><url>
+    <loc>//localhost:8664/tags/</loc>
+  </url>
+</urlset>

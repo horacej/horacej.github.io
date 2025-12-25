@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8664&amp;path=livereload" data-no-instant defer></script>
+  
+    <title> :: </title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DigiSphere Medium: 500 (400) pts DigiSphere is seeking your services to conduct a security audit of their website.
+Challmaker: sora
+We have an app were we can create an account and login.
+There really isn&rsquo;t not much to do a part from that so heading right to the Edit Profile we see something interesting.
+Here we can upload an image so this makes me instantly think to a php file upload or something like that. Firing up burp and trying some stuff we realize that we&rsquo;re quite limited in terms of allowed extensions. We almost always get this:
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:8664/writeups/digisphere/" />
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:8664/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:8664/img/theme-colors/blue.png">
+  <link rel="apple-touch-icon" href="//localhost:8664/img/theme-colors/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="">
+<meta property="og:description" content="DigiSphere Medium: 500 (400) pts DigiSphere is seeking your services to conduct a security audit of their website.
+Challmaker: sora
+We have an app were we can create an account and login.
+There really isn&rsquo;t not much to do a part from that so heading right to the Edit Profile we see something interesting.
+Here we can upload an image so this makes me instantly think to a php file upload or something like that. Firing up burp and trying some stuff we realize that we&rsquo;re quite limited in terms of allowed extensions. We almost always get this:
+" />
+<meta property="og:url" content="//localhost:8664/writeups/digisphere/" />
+<meta property="og:site_name" content="" />
+
+  
+    <meta property="og:image" content="//localhost:8664/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+
+
+
+  <link href="/writeups/digisphere/index.xml" rel="alternate" type="application/rss+xml" title="" />
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="blue">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    0z stuff&#39;s
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/projects">Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups">Writeups</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/projects" >Projects</a></li>
+        
+      
+        
+          <li><a href="/writeups" >Writeups</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+  
+    <div class="index-content">
+      <h1 id="digisphere"><strong><em>DigiSphere</em></strong></h1>
+<h3 id="medium-500-400-pts">Medium: 500 (400) pts</h3>
+<blockquote>
+<p>DigiSphere is seeking your services to conduct a security audit of their website.</p>
+</blockquote>
+<blockquote>
+<p>Challmaker: sora</p>
+</blockquote>
+<p><img src="front_page.png" alt="front page"></p>
+<p>We have an app were we can create an account and login.</p>
+<p>There really isn&rsquo;t not much to do a part from that so heading right to the <code>Edit Profile</code> we see something interesting.</p>
+<p><img src="edit_profile.png" alt="edit profile"></p>
+<p>Here we can upload an image so this makes me instantly think to a <code>php file upload</code> or something like that. Firing up burp and trying some stuff we realize that we&rsquo;re quite limited in terms of allowed extensions. We almost always get this:</p>
+<p><img src="unauthorized_extension.png" alt="unauthorized file extension"></p>
+<p>But the standart image extension are still allowed</p>
+<ul>
+<li><code>png</code></li>
+<li><code>jpeg</code></li>
+<li><code>jpg</code></li>
+</ul>
+<p>And the most interesting thing is that the <code>svg</code> extension is also allowed.</p>
+<p>I then decided to try an <code>XXE via svg file</code>.</p>
+<p>I uploaded the file&hellip;</p>
+<p><img src="redirection.png" alt="redirection"></p>
+<p>And after the redirection we got this</p>
+<p><img src="lfi.png" alt="lfi"></p>
+<p>Nice. Now we just have to find the path to the flag which was in our case <code>/.flag.txt</code></p>
+<p><img src="flag.png" alt="flag"></p>
+<h5 id="by-w1z0z---l3gm1nn"><em>By w1z0z - (l3gm1nn)</em></h5>
+
+    </div>
+  
+  <div class="posts">
+    
+
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+    
+  </div>
+</div>
+
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
