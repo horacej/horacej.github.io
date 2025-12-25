@@ -1,0 +1,1 @@
+<script>window.location.href='/about-me'</script>
