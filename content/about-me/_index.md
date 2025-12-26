@@ -14,6 +14,14 @@ I'm Horace (also known as 0z and variations of "nothing"). Currently a cybersecu
 
 > Certified Penetration Testing Specialist - **HackTheBox**
 
+# CTFs
+
+---
+- Top 1 Cyberlympics 2023
+- Top 2 Ecowas CTF 2024
+- Top 3 Hackerlab 2024
+- Top 7 European Cyber Week 2025
+
 # Contact
 ---
 
