@@ -17,7 +17,7 @@ Once inside there is a profile page.
 ![profile](profile.png)
 
 
-Nothing really interesting. I tried to see is there was an `SSTI` in the username as this is a flask app but nothing.
+Nothing really interesting. I tried to see if there was an `SSTI` in the username as this is a flask app but nothing.
 
 Moving on and reading the source code we get this.
 
