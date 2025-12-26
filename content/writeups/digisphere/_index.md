@@ -11,7 +11,7 @@
 
 We have an app were we can create an account and login.
 
-There really isn't not much to do a part from that so heading right to the `Edit Profile` we see something interesting.
+There really isn't much to do a part from that so heading right to the `Edit Profile` we see something interesting.
 
 ![edit profile](edit_profile.png)
 
