@@ -13,7 +13,7 @@ But trying to do so we get `Permission error: You are not an admin, you do not h
 
 ![lfi forbidden](forbidden_lfi.png)
 
-Now moving on and trying to examine the JWT token we see that there is a `profile` key in the payload part set to `visitor` which is certainly the way that the app make sure that we're an admin or visitor
+Now moving on and trying to examine the JWT token we see that there is a `profile` key in the payload part set to `visitor` which is certainly the way the app makes sure that we're an admin or visitor
 
 ![jwt looking weak](jwt_looking_weak.png)
 
@@ -44,9 +44,9 @@ I then remembered that when doing the directory enumeration I saw this:
 
 ![console_open](console_open.png)
 
-This means that the `debug mode` was enabled and that is not supposed to be the case in production. Trying to access it we're required the `Werkzeug Console Pin`. But here is the thing. This PIN isn't randomly generated. In fact it is mostly based on environment information such a the `username` of the user running the app, the `flask script`, the `mac address`, the `modname` etc...
+This means that the `debug mode` was enabled and that is not supposed to be the case in production. Trying to access it we're required the `Werkzeug Console Pin`. But here is the thing. This PIN isn't randomly generated. In fact it is mostly based on environment information such as the `username` of the user running the app, the `flask script`, the `mac address`, the `modname` etc...
 
-So knowing that we already have an LFI we're know able to retrieve those information in order to generate the PIN.
+So knowing that we already have an LFI we're now able to retrieve those informations in order to generate the PIN.
 
 Here is a github script for that purpose filled with the correct parameters
 

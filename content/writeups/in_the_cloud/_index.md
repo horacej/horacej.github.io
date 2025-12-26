@@ -9,9 +9,9 @@
 ### Recognition phase
 ![base page](base_page.png)
 
-We have on this app we can create an account log into it and post our files which would be available to download for only 5 minutes.
+In this app we can create an account log into it and post our files which would be available to download for only 5 minutes.
 
-Every uploaded file is located at `users/<username>/<filaname>` and trying to access it via url we get a 403. 
+Every uploaded file is located at `users/<username>/<filename>` and trying to access it via url we get a 403. 
 
 ![403](403_page.png)
 
@@ -48,9 +48,9 @@ What I mean by relative path is that whenever a page triggers one of these error
 
 Knowing that we can then assume that by trying to access `/users/<username>` which normally throws a 403 if the folder contain one of our file named style.css it will be relatively loaded at `/users/<username>/style.css` and this opens up a way for CSS injection. We could then use a **_CSS Data Exfiltration_**.
 
-This is a very interesting exploit as it shows how little flaws in security are exploitable. (_Must be crazy to find this exploit lol_)
+This is a very interesting exploit as it shows how little flaws in security are exploitable. (_Must be crazy to find this exploit in the wild lol_)
 
-So here is a beautiful blog that explains it: [CSS Injection](https://aszx87410.github.io/beyond-xss/en/ch3/css-injection/)
+So here is a wonderful blog that explains it: [CSS Injection](https://aszx87410.github.io/beyond-xss/en/ch3/css-injection/)
 
 I then built an exploit script to:
 
@@ -175,7 +175,7 @@ res = requests.post('http://ctf.hackerlab.bj:2020/bounty.php', headers={
 {{< /code >}}
 
 
-To use this script you have to run it with at first with an empty string check which char is reflected on your serv, add it to your _known token part_ and then re-run it again.
+To use this script you have to run it with at first an empty string check which char is reflected on our listener, add it to your _known token part_ and then re-run it again.
 
 ```bash
 ➜  cloud python3 test.py ""
