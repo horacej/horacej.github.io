@@ -14,6 +14,8 @@ I'm Horace (also known as 0z and variations of "nothing"). Currently a cybersecu
 
 > Certified Penetration Testing Specialist - **HackTheBox**
 
+> Certified Web Exploitation Expert - **HackTheBox**
+
 # CTFs
 
 ---
