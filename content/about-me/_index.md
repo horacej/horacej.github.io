@@ -18,6 +18,8 @@ I'm Horace (also known as 0z and variations of "nothing"). Currently a cybersecu
 
 > Certified Web Exploitation Expert - **HackTheBox**
 
+> Certified Defensive Security Analyst - **HackTheBox**
+
 # CTFs
 
 ---
